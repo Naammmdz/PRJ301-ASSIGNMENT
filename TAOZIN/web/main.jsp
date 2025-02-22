@@ -62,6 +62,68 @@
                 </div>
             </div>
         </main>
+        
+        <div class="modal signup-login">
+            <div class="modal-cotainer">
+                <button class="form-close" onclick="closeModal()"><i class="fa-regular fa-xmark"></i></button>
+                <div class="forms mdl-cnt">
+                    <div class="form-content sign-up">
+                        <h3 class="form-title">
+                            Đăng kí tài khoản
+                        </h3>
+                        <p class="form-description">Đăng kí thành viên để mua hàng và nhận ưu đãi độc quyền từ chúng tôi</p>
+                        <form action="" class="signup-form">
+                            <div class="form-group">
+                                <label for="fullname" class="form-label">Tên đầy đủ</label>
+                                <input type="text" id="fullname" name="fullname" placeholder="VD: Bành Thị Lú">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Số điện thoại</label>
+                                <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Mật khẩu</label>
+                                <input type="text" id="password" name="password" placeholder="Nhập mật khẩu">
+                            </div>
+                            <div class="form-group">
+                                <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
+                                <input type="password_confirmation" id="password_confirmation" name="password_confirmation" 
+                                    placeholder="Nhập lại mật khẩu">
+                                <span class="form-message-password-confi form-message"></span>
+                            </div>                    
+                            <div class="form-group">
+                                <input type="checkbox" id="checkbox-signup" name="checkbox" required="">
+                                <label for="checkbox-signup" class="form-checkbox"><a href="#"
+                                        target="_blank">Tôi đồng ý với chính sách cửa hàng</a></label>
+                                <p class="form-message-checkbox form-message"></p>
+                            </div>
+                            <button class="form-submit" id="signup-button">Đăng kí</button>
+                        </form>
+                        <p class="chang-login">Bạn đã có tài khoản? <a href="javascript:;" class="login-link">Đăng nhập</a></p>
+                    </div>
+                    <div class="form-content login">
+                        <h3 class="form-title">
+                            Đăng nhập tài khoản
+                        </h3>
+                        <p class="form-description">Đăng nhập để mua hàng và nhận ưu đãi mới nhất</p>
+                        <form action="" class="login-form">
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Số điện thoại</label>
+                                <input type="text" id="phone-login" name="phone" placeholder="Nhập số điện thoại">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label">Mật khẩu</label>
+                                <input type="text" id="password-login" name="password" placeholder="Nhập mật khẩu">
+                                <span class="form-message-check-login form-message"></span>
+                            </div>
+                            <button class="form-submit" id="login-button">Đăng nhập</button>
+                        </form>
+                        <p class="chang-login">Bạn chưa có tài khoản? <a href="javascript:;" class="login-link">Đăng kí</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
         <jsp:include page="footer.jsp"/>
     </body>
 </html>
