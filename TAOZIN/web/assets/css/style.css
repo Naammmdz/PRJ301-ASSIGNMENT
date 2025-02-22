@@ -646,7 +646,7 @@ header {
 }
 
 .form-control:focus {
-    border-color: var(--red);
+    border-color: var(--blue);
 }
 
 .form-message {
@@ -661,7 +661,7 @@ header {
     outline: none;
     border: none;
     color: var(--white);
-    background-color: var(--red);
+    background-color: var(--blue);
     border-radius: 5px;
     cursor: pointer;
     text-transform: uppercase;
@@ -694,9 +694,8 @@ label a {
     font-size: 16px;
 }
 
-
-.lg-container button:first-of-type {
-    border-right: 1px solid #eee;
+.form-group {
+    margin-right: 30px;
 }
 
 /* Footer */

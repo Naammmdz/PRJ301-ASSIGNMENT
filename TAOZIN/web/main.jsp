@@ -62,9 +62,9 @@
                 </div>
             </div>
         </main>
-        
+  
         <div class="modal signup-login">
-            <div class="modal-cotainer">
+            <div class="modal-container">
                 <button class="form-close" onclick="closeModal()"><i class="fa-regular fa-xmark"></i></button>
                 <div class="forms mdl-cnt">
                     <div class="form-content sign-up">
@@ -75,20 +75,20 @@
                         <form action="" class="signup-form">
                             <div class="form-group">
                                 <label for="fullname" class="form-label">Tên đầy đủ</label>
-                                <input type="text" id="fullname" name="fullname" placeholder="VD: Bành Thị Lú">
+                                <input type="text" id="fullname" name="fullname" placeholder="VD: Bành Thị Lú" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="phone" class="form-label">Số điện thoại</label>
-                                <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại">
+                                <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="phone" class="form-label">Mật khẩu</label>
-                                <input type="text" id="password" name="password" placeholder="Nhập mật khẩu">
+                                <input type="text" id="password" name="password" placeholder="Nhập mật khẩu" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
                                 <input type="password_confirmation" id="password_confirmation" name="password_confirmation" 
-                                    placeholder="Nhập lại mật khẩu">
+                                    placeholder="Nhập lại mật khẩu" class="form-control">
                                 <span class="form-message-password-confi form-message"></span>
                             </div>                    
                             <div class="form-group">
@@ -109,21 +109,22 @@
                         <form action="" class="login-form">
                             <div class="form-group">
                                 <label for="phone" class="form-label">Số điện thoại</label>
-                                <input type="text" id="phone-login" name="phone" placeholder="Nhập số điện thoại">
+                                <input type="text" id="phone-login" name="phone" placeholder="Nhập số điện thoại" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="phone" class="form-label">Mật khẩu</label>
-                                <input type="text" id="password-login" name="password" placeholder="Nhập mật khẩu">
+                                <input type="text" id="password-login" name="password" placeholder="Nhập mật khẩu" class="form-control">
                                 <span class="form-message-check-login form-message"></span>
                             </div>
                             <button class="form-submit" id="login-button">Đăng nhập</button>
                         </form>
-                        <p class="chang-login">Bạn chưa có tài khoản? <a href="javascript:;" class="login-link">Đăng kí</a></p>
+                        <p class="change-login">Bạn chưa có tài khoản? <a href="javascript:;" class="signup-link">Đăng kí</a></p>
                     </div>
                 </div>
             </div>
         </div>
         
         <jsp:include page="footer.jsp"/>
+        <script src="js/main.js"></script>
     </body>
 </html>
