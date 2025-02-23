@@ -72,7 +72,8 @@
                             Đăng kí tài khoản
                         </h3>
                         <p class="form-description">Đăng kí thành viên để mua hàng và nhận ưu đãi độc quyền từ chúng tôi</p>
-                        <form action="" class="signup-form">
+                        <form action="MainController" class="signup-form" method="post">
+                            <input type="hidden" name="action" value="sign" />
                             <div class="form-group">
                                 <label for="fullname" class="form-label">Tên đầy đủ</label>
                                 <input type="text" id="fullname" name="fullname" placeholder="VD: Bành Thị Lú" class="form-control">
@@ -82,12 +83,12 @@
                                 <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="phone" class="form-label">Mật khẩu</label>
-                                <input type="text" id="password" name="password" placeholder="Nhập mật khẩu" class="form-control">
+                                <label for="password" class="form-label">Mật khẩu</label>
+                                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" class="form-control">
                             </div>
                             <div class="form-group">
                                 <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
-                                <input type="password_confirmation" id="password_confirmation" name="password_confirmation" 
+                                <input type="password" id="password_confirmation" name="password_confirmation" 
                                     placeholder="Nhập lại mật khẩu" class="form-control">
                                 <span class="form-message-password-confi form-message"></span>
                             </div>                    
@@ -106,14 +107,15 @@
                             Đăng nhập tài khoản
                         </h3>
                         <p class="form-description">Đăng nhập để mua hàng và nhận ưu đãi mới nhất</p>
-                        <form action="" class="login-form">
+                        <form action="MainController" class="login-form" method="post">
+                            <input type="hidden" name="action" value="login" />
                             <div class="form-group">
                                 <label for="phone" class="form-label">Số điện thoại</label>
                                 <input type="text" id="phone-login" name="phone" placeholder="Nhập số điện thoại" class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="phone" class="form-label">Mật khẩu</label>
-                                <input type="text" id="password-login" name="password" placeholder="Nhập mật khẩu" class="form-control">
+                                <label for="password" class="form-label">Mật khẩu</label>
+                                <input type="password" id="password-login" name="password" placeholder="Nhập mật khẩu" class="form-control">
                                 <span class="form-message-check-login form-message"></span>
                             </div>
                             <button class="form-submit" id="login-button">Đăng nhập</button>

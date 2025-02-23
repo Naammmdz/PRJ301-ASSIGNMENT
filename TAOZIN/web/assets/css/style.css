@@ -632,7 +632,7 @@ header {
 }
 
 .form-control {
-    width: 100%;
+    width: 340px;
     height: 40px;
     padding: 8px 12px;
     border: 1px solid #e5e5e5;
@@ -685,7 +685,7 @@ header {
 
 .change-login a,
 label a {
-    color: var(--red);
+    color: var(--blue);
 }
 
 .change-login {
