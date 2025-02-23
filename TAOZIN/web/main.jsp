@@ -100,7 +100,7 @@
                             </div>
                             <button class="form-submit" id="signup-button">Đăng kí</button>
                         </form>
-                        <p class="chang-login">Bạn đã có tài khoản? <a href="javascript:;" class="login-link">Đăng nhập</a></p>
+                        <p class="change-login">Bạn đã có tài khoản? <a href="javascript:;" class="login-link">Đăng nhập</a></p>
                     </div>
                     <div class="form-content login">
                         <h3 class="form-title">
@@ -127,6 +127,7 @@
         </div>
         
         <jsp:include page="footer.jsp"/>
+        <jsp:include page="scrollup.jsp"/>
         <script src="js/main.js"></script>
     </body>
 </html>
