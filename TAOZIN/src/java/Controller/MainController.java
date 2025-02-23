@@ -55,17 +55,31 @@ public class MainController extends HttpServlet {
                     if(isValidLogin(strPhone, strPassword)){
                         url = HOME_PAGE;
                         UserDTO user = getUser(strPhone);
+                        request.setAttribute("toastMessage", "Đăng nhập thành công");
+                        request.setAttribute("toastType", "success");
                         request.getSession().setAttribute("user", user);
+                    }else if (getUser(strPhone) == null){
+                        request.setAttribute("toastMessage", "Tài khoản không tồn tại!");
+                        request.setAttribute("toastType", "error");
+                        request.setAttribute("showLogin", "true");
+                        request.setAttribute("showForm", "true");
+                        request.setAttribute("showLogin", "true");                        
                     }else{
-                        
+                        request.setAttribute("toastMessage", "Sai mật khẩu!");
+                        request.setAttribute("toastType", "warning");
+                        request.setAttribute("showForm", "true");
+                        request.setAttribute("showLogin", "true");
                     }
+                }else  if (action.equals("logout")) {
+                    request.getSession().invalidate(); // Hủy bỏ session
+                    url = HOME_PAGE;
                 }
             }
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
         }finally {
             RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
+            rd.forward(request, response) ;
         }
     }
 

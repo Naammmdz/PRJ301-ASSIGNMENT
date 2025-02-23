@@ -12,6 +12,7 @@
         <title>TÁO ZIN</title>
         <link href='assets/img/logo-color.png' rel='icon' type='image/x-icon' />
         <link rel="stylesheet" href="assets/css/style.css"> 
+        <link rel="stylesheet" href="assets/css/toast-message.css"> 
         <link rel="stylesheet" href="assets/font/font-awesome-pro-v6-6.2.0/css/all.min.css"/>
     </head>
     <body>
@@ -62,9 +63,31 @@
                 </div>
             </div>
         </main>
-  
-        <div class="modal signup-login">
-            <div class="modal-container">
+        
+        <%
+            String showForm = (String) request.getAttribute("showForm");
+            String showLogin = (String) request.getAttribute("showLogin");
+        %>
+        <%  if ("true".equals(showForm)) {
+                if ("true".equals(showLogin)) { %> 
+                    <div class="modal signup-login open">
+                        <div class="modal-container active">
+            <%
+                }else{ %>
+                    <div class="modal signup-login open">
+                        <div class="modal-container">
+            <%
+                }
+            %>
+        <%
+            }else{ %>
+                <div class="modal signup-login">
+                    <div class="modal-container">
+        <%
+           }
+        %>
+<!--        <div class="modal signup-login">-->
+<!--            <div class="modal-container">-->
                 <button class="form-close" onclick="closeModal()"><i class="fa-regular fa-xmark"></i></button>
                 <div class="forms mdl-cnt">
                     <div class="form-content sign-up">
@@ -125,9 +148,61 @@
                 </div>
             </div>
         </div>
-        
+        <% 
+            String message = (String) request.getAttribute("toastMessage");
+            String type = (String) request.getAttribute("toastType");
+
+            if (message != null && type != null) {
+                String icon = "";
+                String color = "";
+
+                switch (type) {
+                    case "success":
+                        icon = "fa-light fa-check";
+                        color = "#47d864";
+                        break;
+                    case "info":
+                        icon = "fa-solid fa-circle-info";
+                        color = "#2f86eb";
+                        break;
+                    case "warning":
+                        icon = "fa-solid fa-triangle-exclamation";
+                        color = "#ffc021";
+                        break;
+                    case "error":
+                        icon = "fa-solid fa-bug";
+                        color = "#ff6243";
+                        break;
+                }
+        %>
+            <div id="toast">
+                <div class="toast toast--<%=type%>" 
+                     style="animation: slideInLeft ease 0.3s, fadeOut linear 1s 3s forwards">
+                    <div class="toast__private">
+                        <div class="toast__icon">
+                            <i class="<%=icon%>"></i>
+                        </div>
+                        <div class="toast__body">
+                            <h3 class="toast__title"><%= type.substring(0, 1).toUpperCase() + type.substring(1) %></h3>
+                            <p class="toast__msg"><%= message %></p>
+                        </div>
+                        <div class="toast__close">
+                            <i class="fa-regular fa-circle-xmark"></i>
+                        </div>
+                    </div>
+                    <div class="toast__background" style="background-color: <%= color %>;">
+                    </div>
+                </div>
+            </div>
+        <%
+            }
+        %>
+        <%
+            session.removeAttribute("toastMessage");
+            session.removeAttribute("toastType");
+        %>
         <jsp:include page="footer.jsp"/>
-        <jsp:include page="scrollup.jsp"/>
+        <%@include file="scrollup.jsp" %>
         <script src="js/main.js"></script>
     </body>
 </html>

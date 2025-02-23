@@ -7,5 +7,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!--========== SCROLL UP ==========-->
 <a href="#" class="scrollup" id="scroll-up">
-   <i class="ri-skip-up-line"></i>
+    <i class="fa-light fa-up-to-line"></i>
 </a>

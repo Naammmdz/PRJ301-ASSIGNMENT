@@ -2,7 +2,7 @@
 const scrollUp = () =>{
 	const scrollUp = document.getElementById('scroll-up');
     // When the scroll is higher than 350 viewport height, add the show-scroll class to the a tag with the scrollup class
-	this.scrollY >= 50 ? scrollUp.classList.add('show-scroll')
+	this.scrollY >= 350 ? scrollUp.classList.add('show-scroll')
 						: scrollUp.classList.remove('show-scroll');
 };
 window.addEventListener('scroll', scrollUp);
@@ -79,4 +79,29 @@ loginbtn.addEventListener('click', () => {
     formsg.classList.add('open');
     container.classList.add('active');
     body.style.overflow = "hidden";
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const toastContainer = document.getElementById("toast");
+    if (!toastContainer) return;
+
+    //Auto remove toast
+    const toasts = toastContainer.querySelectorAll(".toast");
+    toasts.forEach((toast) => {
+        const autoRemove = setTimeout(() => {
+            toast.remove();
+        }, 4000);
+
+        toast.dataset.autoRemove = autoRemove;
+    });
+
+    //Remove toast when click btn close
+    toastContainer.addEventListener("click", function (e) {
+        const closeBtn = e.target.closest(".toast__close");
+        if (closeBtn) {
+            const toast = closeBtn.closest(".toast");
+            clearTimeout(toast.dataset.autoRemove);
+            toast.remove();
+        }
+    });
 });

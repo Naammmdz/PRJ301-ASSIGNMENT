@@ -4,6 +4,7 @@
     Author     : Naammm
 --%>
 
+<%@page import="dto.UserDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!--==================== HEADERHEADER ====================-->
 <header class="header">
@@ -54,17 +55,31 @@
                         <i class="fa-light fa-circle-xmark"></i>
                     </div>
                 </li> -->
-                <li class="header-right-item dropdown open">
+                <li class="header-right-item dropdown <%= session.getAttribute("user") != null ? "logged-in" : "open" %>">
                     <i class="fa-light fa-user"></i>
                     <div class="auth-container">
-                        <span class="text-dndk">Đăng nhập / Đăng ký</span>
-                        <span class="text-tk">Tài khoản <i class="fa-sharp fa-solid fa-caret-down"></i></span>
+                        <% if (session.getAttribute("user") != null) {
+                            UserDTO user = (UserDTO) session.getAttribute("user");
+                        %>
+                            <span class="text-dndk">Tài khoản</span>
+                            <span class="text-tk"><%= user.getFullName() %> <i class="fa-sharp fa-solid fa-caret-down"></i></span>
+                    </div>    
+                    <ul class="header-right-menu">
+                        <li><a href="javascript:;" onclick="myAccount()"><i class="fa-light fa-circle-user"></i> Tài khoản của tôi</a></li>
+                        <li><a href="javascript:;" onclick="orderHistory()"><i class="fa-regular fa-bags-shopping"></i> Đơn hàng đã mua</a></li>
+                        <li class="border"><a href="MainController?action=logout"><i class="fa-light fa-right-from-bracket"></i> Thoát tài khoản</a></li>
+                    </ul>
+                        <% } else { %>
+                            <span class="text-dndk">Đăng nhập / Đăng ký</span>
+                            <span class="text-tk">Tài khoản <i class="fa-sharp fa-solid fa-caret-down"></i></span>
                     </div>
                     <ul class="header-right-menu">
                         <li><a id="login" href="javascript:;"><i class="fa-light fa-right-to-bracket"></i> Đăng nhập</a></li>
                         <li><a id="signup" href="javascript:;"><i class="fa-light fa-user-plus"></i> Đăng ký</a></li>
                     </ul>
+                    <% } %>
                 </li>
+
                 <li class="header-right-item open" onclick="openCart()">
                     <div class="cart-icon-menu">
                         <i class="fa-light fa-cart-shopping"></i>
