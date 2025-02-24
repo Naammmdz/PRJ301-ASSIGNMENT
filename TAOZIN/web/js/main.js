@@ -22,14 +22,14 @@ modalContainer.forEach(item => {
 modalBox.forEach(item => {
     item.addEventListener('click', function (event) {
         event.stopPropagation();
-    })
+    });
 });
 
 function closeModal() {
     modalContainer.forEach(item => {
         item.classList.remove('open');
     });
-    console.log(modalContainer)
+    console.log(modalContainer);
     body.style.overflow = "auto";
 }
 
@@ -81,11 +81,36 @@ loginbtn.addEventListener('click', () => {
     body.style.overflow = "hidden";
 });
 
-document.addEventListener("DOMContentLoaded", function () {
+//document.addEventListener("DOMContentLoaded", function () {
+//    const toastContainer = document.getElementById("toast");
+//    if (!toastContainer) return;
+//
+//    //Auto remove toast
+//    const toasts = toastContainer.querySelectorAll(".toast");
+//    toasts.forEach((toast) => {
+//        const autoRemove = setTimeout(() => {
+//            toast.remove();
+//        }, 4000);
+//
+//        toast.dataset.autoRemove = autoRemove;
+//    });
+//
+//    //Remove toast when click btn close
+//    toastContainer.addEventListener("click", function (e) {
+//        const closeBtn = e.target.closest(".toast__close");
+//        if (closeBtn) {
+//            const toast = closeBtn.closest(".toast");
+//            clearTimeout(toast.dataset.autoRemove);
+//            toast.remove();
+//        }
+//    });
+//});
+
+function initToast() {
     const toastContainer = document.getElementById("toast");
     if (!toastContainer) return;
 
-    //Auto remove toast
+    // Auto remove toast
     const toasts = toastContainer.querySelectorAll(".toast");
     toasts.forEach((toast) => {
         const autoRemove = setTimeout(() => {
@@ -95,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
         toast.dataset.autoRemove = autoRemove;
     });
 
-    //Remove toast when click btn close
+    // Remove toast when click btn close
     toastContainer.addEventListener("click", function (e) {
         const closeBtn = e.target.closest(".toast__close");
         if (closeBtn) {
@@ -104,4 +129,66 @@ document.addEventListener("DOMContentLoaded", function () {
             toast.remove();
         }
     });
-});
+}
+
+document.addEventListener("DOMContentLoaded", initToast);
+
+//Img Slider
+function initSlider() {
+    let slider = document.querySelector('.home-banner .list');
+    let items = document.querySelectorAll('.home-banner .list .item');
+    let next = document.getElementById('next');
+    let prev = document.getElementById('prev');
+    let dots = document.querySelectorAll('.home-banner .dots li');
+
+    if (!slider || items.length === 0 || !next || !prev || dots.length === 0) {
+        console.error("Không tìm thấy phần tử cần thiết.");
+        return;
+    }
+
+    let lengthItems = items.length - 1;
+    let active = 0;
+
+    next.onclick = function () {
+        active = active + 1 <= lengthItems ? active + 1 : 0;
+        reloadSlider();
+    };
+
+    prev.onclick = function () {
+        active = active - 1 >= 0 ? active - 1 : lengthItems;
+        reloadSlider();
+    };
+
+    let refreshInterval = setInterval(() => {
+        next.click();
+    }, 5000);
+
+    function reloadSlider() {
+        let itemWidth = items[0].clientWidth;
+        slider.style.transform = `translateX(-${active * itemWidth}px)`;
+
+        // Cập nhật trạng thái dot
+        let activeDot = document.querySelector('.home-banner .dots li.active');
+        if (activeDot) activeDot.classList.remove('active');
+        dots[active].classList.add('active');
+
+        // Reset lại thời gian tự động chuyển slide
+        clearInterval(refreshInterval);
+        refreshInterval = setInterval(() => {
+            next.click();
+        }, 3000);
+    }
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            active = index;
+            reloadSlider();
+        });
+    });
+
+    window.onresize = function () {
+        reloadSlider();
+    };
+}
+
+document.addEventListener("DOMContentLoaded", initSlider);

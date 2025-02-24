@@ -21,7 +21,22 @@
         <main class="main-wrapper">
             <div class="container" id="homescreen">
                 <div class="home-banner">
-                    <img src="assets/img/banner.png" alt="">
+                    <div class="list">
+                        <div class="item">
+                            <img src="assets/img/banner1.png" alt="Banner 1">
+                        </div>
+                        <div class="item">
+                            <img src="assets/img/banner2.png" alt="Banner 2">
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button id="prev"><</button>
+                        <button id="next">></button>
+                    </div>
+                    <ul class="dots">
+                        <li class="active"></li>
+                        <li></li>
+                    </ul>
                 </div>
                 <div class="home-service">
                     <div class="home-service-item">
@@ -65,8 +80,10 @@
         </main>
         
         <%
-            String showForm = (String) request.getAttribute("showForm");
-            String showLogin = (String) request.getAttribute("showLogin");
+            String showForm = (String) session.getAttribute("showForm");
+            String showLogin = (String) session.getAttribute("showLogin");
+            session.removeAttribute("showForm");
+            session.removeAttribute("showLogin");
         %>
         <%  if ("true".equals(showForm)) {
                 if ("true".equals(showLogin)) { %> 
@@ -86,8 +103,6 @@
         <%
            }
         %>
-<!--        <div class="modal signup-login">-->
-<!--            <div class="modal-container">-->
                 <button class="form-close" onclick="closeModal()"><i class="fa-regular fa-xmark"></i></button>
                 <div class="forms mdl-cnt">
                     <div class="form-content sign-up">
@@ -96,7 +111,7 @@
                         </h3>
                         <p class="form-description">Đăng kí thành viên để mua hàng và nhận ưu đãi độc quyền từ chúng tôi</p>
                         <form action="MainController" class="signup-form" method="post">
-                            <input type="hidden" name="action" value="sign" />
+                            <input type="hidden" name="action" value="signup" />
                             <div class="form-group">
                                 <label for="fullname" class="form-label">Tên đầy đủ</label>
                                 <input type="text" id="fullname" name="fullname" placeholder="VD: Bành Thị Lú" class="form-control">
@@ -149,8 +164,10 @@
             </div>
         </div>
         <% 
-            String message = (String) request.getAttribute("toastMessage");
-            String type = (String) request.getAttribute("toastType");
+            String message = (String) session.getAttribute("toastMessage");
+            String type = (String) session.getAttribute("toastType");
+            session.removeAttribute("toastMessage");
+            session.removeAttribute("toastType");
 
             if (message != null && type != null) {
                 String icon = "";
@@ -197,12 +214,36 @@
         <%
             }
         %>
-        <%
-            session.removeAttribute("toastMessage");
-            session.removeAttribute("toastType");
-        %>
         <jsp:include page="footer.jsp"/>
         <%@include file="scrollup.jsp" %>
         <script src="js/main.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                initSlider();
+                initToast();
+            });
+        </script>
     </body>
 </html>
+<!--//                   _oo0oo_
+//                      o8888888o
+//                      88" . "88
+//                      (| -_- |)
+//                      0\  =  /0
+//                    ___/`---'\___
+//                  .' \\|     |// '.
+//                 / \\|||  :  |||// \
+//                / _||||| -:- |||||- \
+//               |   | \\\  -  /// |   |
+//               | \_|  ''\---/''  |_/ |
+//               \  .-\__  '-'  ___/-. /
+//             ___'. .'  /--.--\  `. .'___
+//          ."" '<  `.___\_<|>_/___.' >' "".
+//         | | :  `- \`.;`\ _ /`;.`/ - ` : | |
+//         \  \ `_.   \_ __\ /__ _/   .-` /  /
+//     =====`-.____`.___ \_____/___.-`___.-'=====
+//                       `=---='
+//
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//            Phật phù hộ, không bao giờ BUG
+//     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->

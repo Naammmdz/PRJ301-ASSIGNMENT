@@ -7,7 +7,6 @@ package Controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,30 +17,21 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Naammm
  */
-@WebServlet(name = "MainController", urlPatterns = {"/MainController"})
-public class MainController extends HttpServlet {
+@WebServlet(name = "SignupController", urlPatterns = {"/SignupController"})
+public class SignupController extends HttpServlet {
 
-        private static final String HOME_PAGE = "main.jsp";
-        private static final String LOGIN_CONTROLLER = "LoginController";
-        private static final String SIGNUP_CONTROLLER = "SignupController";
-        
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = HOME_PAGE;
-        try {
-            String action = request.getParameter("action");
-            if ("login".equals(action) || "logout".equals(action)) {
-                url = LOGIN_CONTROLLER;
-            }else if ("sigup".equals(action)){
-                url = SIGNUP_CONTROLLER;
-            }
-        } catch (Exception e) {
-            log("Error at MainController: " + e.toString());
-        }finally {
-            RequestDispatcher rd = request.getRequestDispatcher(url);
-            rd.forward(request, response);
-        }
 
     }
 

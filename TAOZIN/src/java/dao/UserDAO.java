@@ -25,7 +25,31 @@ public class UserDAO implements IDAO<UserDTO, String>{
 
     @Override
     public boolean create(UserDTO entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "INSERT [dbo].[tblUsers] ([fullName], [phone], [roleID], [password]) "
+                + "VALUES (?, ? ,? ,?)";
+        Connection conn;
+        try {
+            conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, entity.getFullName());
+            ps.setString(2, entity.getPhone());
+            ps.setString(3, entity.getRoleID());
+            ps.setString(4, entity.getPassword());
+            int n = ps.executeUpdate();
+            if (n > 0) {
+            try (ResultSet rs = ps.getGeneratedKeys()) {
+                if (rs.next()) {
+                    entity.setUserID(rs.getInt(1));
+                }
+            }
+            return true;
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override
