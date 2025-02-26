@@ -65,21 +65,46 @@ signup.addEventListener('click', () => {
     container.classList.remove('active');
 });
 
-let signupbtn = document.getElementById('signup');
-let loginbtn = document.getElementById('login');
-let formsg = document.querySelector('.modal.signup-login');
-signupbtn.addEventListener('click', () => {
-    formsg.classList.add('open');
-    container.classList.remove('active');
-    body.style.overflow = "hidden";
-});
+//let signupbtn = document.getElementById('signup');
+//let loginbtn = document.getElementById('login');
+//let formsg = document.querySelector('.modal.signup-login');
+//signupbtn.addEventListener('click', () => {
+//    formsg.classList.add('open');
+//    container.classList.remove('active');
+//    body.style.overflow = "hidden";
+//});
 
-loginbtn.addEventListener('click', () => {
+try {
+    let signupbtn = document.getElementById('signup');
+    let loginbtn = document.getElementById('login');
+    let formsg = document.querySelector('.modal.signup-login');
+    
+    signupbtn.addEventListener('click', () => {
+        try {
+            formsg.classList.add('open');
+            container.classList.remove('active');
+            body.style.overflow = "hidden";
+        } catch (error) {
+            console.error("Lỗi khi xử lý sự kiện click:", error);
+        }
+    });
+    
+    loginbtn.addEventListener('click', () => {
     document.querySelector('.form-message-check-login').innerHTML = '';
     formsg.classList.add('open');
     container.classList.add('active');
     body.style.overflow = "hidden";
 });
+} catch (error) {
+    console.error("Lỗi khi gán sự kiện:", error);
+}
+
+//loginbtn.addEventListener('click', () => {
+//    document.querySelector('.form-message-check-login').innerHTML = '';
+//    formsg.classList.add('open');
+//    container.classList.add('active');
+//    body.style.overflow = "hidden";
+//});
 
 //document.addEventListener("DOMContentLoaded", function () {
 //    const toastContainer = document.getElementById("toast");

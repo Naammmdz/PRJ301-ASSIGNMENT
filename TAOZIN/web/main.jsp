@@ -217,12 +217,12 @@
         <jsp:include page="footer.jsp"/>
         <%@include file="scrollup.jsp" %>
         <script src="js/main.js"></script>
-        <script>
+<!--        <script>
             document.addEventListener("DOMContentLoaded", function () {
                 initSlider();
                 initToast();
             });
-        </script>
+        </script>-->
     </body>
 </html>
 <!--//                   _oo0oo_
