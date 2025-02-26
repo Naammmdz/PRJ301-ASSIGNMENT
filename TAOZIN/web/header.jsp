@@ -65,6 +65,9 @@
                             <span class="text-tk"><%= user.getFullName() %> <i class="fa-sharp fa-solid fa-caret-down"></i></span>
                     </div>    
                     <ul class="header-right-menu">
+                        <% if (user.getRoleID().equals("AD")) { %>
+                            <li><a href="./admin.html"><i class="fa-light fa-gear"></i> Quản lý cửa hàng</a></li>
+                        <% } %>
                         <li><a href="javascript:;" onclick="myAccount()"><i class="fa-light fa-circle-user"></i> Tài khoản của tôi</a></li>
                         <li><a href="javascript:;" onclick="orderHistory()"><i class="fa-regular fa-bags-shopping"></i> Đơn hàng đã mua</a></li>
                         <li class="border"><a href="MainController?action=logout"><i class="fa-light fa-right-from-bracket"></i> Thoát tài khoản</a></li>

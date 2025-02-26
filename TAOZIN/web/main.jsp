@@ -28,6 +28,12 @@
                         <div class="item">
                             <img src="assets/img/banner2.png" alt="Banner 2">
                         </div>
+                        <div class="item">
+                            <img src="assets/img/banner3.png" alt="Banner 3">
+                        </div>
+                        <div class="item">
+                            <img src="assets/img/banner4.png" alt="Banner 4">
+                        </div>
                     </div>
                     <div class="buttons">
                         <button id="prev"><</button>
@@ -35,6 +41,8 @@
                     </div>
                     <ul class="dots">
                         <li class="active"></li>
+                        <li></li>
+                        <li></li>
                         <li></li>
                     </ul>
                 </div>
@@ -145,15 +153,20 @@
                             Đăng nhập tài khoản
                         </h3>
                         <p class="form-description">Đăng nhập để mua hàng và nhận ưu đãi mới nhất</p>
+                        <% 
+                            String userPhone = (String) session.getAttribute("userPhone")+"";
+                            userPhone= userPhone.equals("null")?"":userPhone; 
+                            session.removeAttribute("userPhone");
+                        %>
                         <form action="MainController" class="login-form" method="post">
                             <input type="hidden" name="action" value="login" />
                             <div class="form-group">
                                 <label for="phone" class="form-label">Số điện thoại</label>
-                                <input type="text" id="phone-login" name="phone" placeholder="Nhập số điện thoại" class="form-control">
+                                <input type="text" id="phone-login" name="phone" placeholder="Nhập số điện thoại" class="form-control" value="<%=userPhone%>" required>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="form-label">Mật khẩu</label>
-                                <input type="password" id="password-login" name="password" placeholder="Nhập mật khẩu" class="form-control">
+                                <input type="password" id="password-login" name="password" placeholder="Nhập mật khẩu" class="form-control" required>
                                 <span class="form-message-check-login form-message"></span>
                             </div>
                             <button class="form-submit" id="login-button">Đăng nhập</button>
@@ -214,7 +227,8 @@
         <%
             }
         %>
-        <jsp:include page="footer.jsp"/>
+        <%@include file="footer.jsp" %>
+        <%--<jsp:include page="footer.jsp"/>--%>
         <%@include file="scrollup.jsp" %>
         <script src="js/main.js"></script>
 <!--        <script>

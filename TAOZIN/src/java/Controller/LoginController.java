@@ -68,6 +68,7 @@ public class LoginController extends HttpServlet {
                         session.setAttribute("showForm", "true");                        
                     }else{
                         session.setAttribute("toastMessage", "Sai mật khẩu!");
+                        session.setAttribute("userPhone", strPhone);
                         session.setAttribute("toastType", "warning");
                         session.setAttribute("showLogin", "true");
                         session.setAttribute("showForm", "true");

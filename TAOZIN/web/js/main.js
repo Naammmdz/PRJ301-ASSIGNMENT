@@ -131,6 +131,8 @@ try {
 //    });
 //});
 
+
+// Remove Toast
 function initToast() {
     const toastContainer = document.getElementById("toast");
     if (!toastContainer) return;
