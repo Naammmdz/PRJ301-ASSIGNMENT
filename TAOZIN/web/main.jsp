@@ -4,6 +4,8 @@
     Author     : Naammm
 --%>
 
+<%@page import="dto.ProductDTO"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -84,7 +86,36 @@
                         </div>
                     </div>
                 </div>
+                <div class="home-title-block" id="home-title">
+                    <h2 class="home-title">iPhone</h2>
+                </div>
+                <%
+                    List<ProductDTO> productList = (List<ProductDTO>) request.getAttribute("productList");
+                %>
+                <div class="product-container">
+                    <% if (productList != null) { %>
+                        <% for (ProductDTO product : productList) { %>
+                            <div class="product-card">
+                                <img src="<%= product.getThumbnail() %>" alt="Product Image">
+                                <h2><%= product.getProductName() %></h2>
+                                <span>Giá: <%= product.getPrice() %> VNĐ</span>
+                                <div class="star">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
+                            </div>
+                        <% } %>
+                    <% } else { %>
+                        <p>Không có sản phẩm nào.</p>
+                    <% } %>
+                </div>
             </div>
+            
+            
         </main>
         
         <%

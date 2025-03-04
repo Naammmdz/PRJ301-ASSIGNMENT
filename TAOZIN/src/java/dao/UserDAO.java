@@ -75,7 +75,6 @@ public class UserDAO implements IDAO<UserDTO, String>{
         return null;
     }
     
-    @Override
     public UserDTO readByPhone(String phone) {
         String sql = "SELECT * FROM tblUsers WHERE phone= ?";
         try {
