@@ -31,9 +31,10 @@ public class MainController extends HttpServlet {
         String url = HOME_PAGE;
         try {
             String action = request.getParameter("action");
+            System.out.println("action: " + action);
             if ("login".equals(action) || "logout".equals(action)) {
                 url = LOGIN_CONTROLLER;
-            }else if ("sigup".equals(action)){
+            }else if ("signup".equals(action)){
                 url = SIGNUP_CONTROLLER;
             }
         } catch (Exception e) {

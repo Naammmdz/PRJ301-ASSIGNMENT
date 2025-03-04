@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="sqljdbc5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/TAOZIN/build/web/lib/sqljdbc4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

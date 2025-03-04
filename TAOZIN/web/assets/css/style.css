@@ -761,7 +761,7 @@ label a {
 
 /* Footer */
 .footer {
-    background-color: #f2f2f2;
+    background-color: #fff;
     margin-top: 30px;
     border-top: 4px solid var(--blue);
 }
@@ -930,8 +930,8 @@ label a {
 }
 
 .copyright-wrap {
-    background: #f3f5f7;
-    color: var(--text-color);
+    background: #000;
+    color: var(--white);
     margin: unset;
     padding: 18px 0;
     border-top: 1px solid #e6e6e6;

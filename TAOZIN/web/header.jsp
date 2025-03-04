@@ -14,7 +14,7 @@
             <!-- LOGO -->
             <div class="header-logo">
                 <a href="index.jsp" class="logo">
-                    <img src="assets/img/logo-no-background.png" alt="TÁO ZIN - iPhone, iPad, Mac, phụ kiện điện tử chính hãng" class="header-logo-img">
+                    <img src="assets/img/logo-no-background-1.png" alt="TÁO ZIN - iPhone, iPad, Mac, phụ kiện điện tử chính hãng" class="header-logo-img" style="">
                 </a>
             </div>
 

@@ -118,32 +118,52 @@
                             Đăng kí tài khoản
                         </h3>
                         <p class="form-description">Đăng kí thành viên để mua hàng và nhận ưu đãi độc quyền từ chúng tôi</p>
+                        <% 
+                                String errorFullname = (String) session.getAttribute("errorFullname")+"";
+                                String errorPhone = (String) session.getAttribute("errorPhone")+"";
+                                String errorPassword = (String) session.getAttribute("errorPassword")+"";
+                                String errorPasswordConf = (String) session.getAttribute("errorPasswordConf")+"";
+                                String signFullname = (String) session.getAttribute("signFullname")+"";
+                                String signPassword = (String) session.getAttribute("signPassword")+"";
+                                String signPhone = (String) session.getAttribute("signPhone")+"";
+                                
+                                session.removeAttribute("errorFullname");
+                                session.removeAttribute("errorPhone");
+                                session.removeAttribute("errorPassword");
+                                session.removeAttribute("errorPasswordConf");
+                                session.removeAttribute("signFullname");
+                                session.removeAttribute("signPassword");
+                                session.removeAttribute("signPhone");
+                        %>
                         <form action="MainController" class="signup-form" method="post">
                             <input type="hidden" name="action" value="signup" />
                             <div class="form-group">
                                 <label for="fullname" class="form-label">Tên đầy đủ</label>
-                                <input type="text" id="fullname" name="fullname" placeholder="VD: Bành Thị Lú" class="form-control">
+                                <input type="text" id="fullname" name="fullnameSign" placeholder="VD: Bành Thị Lú" class="form-control"  value="<%= signFullname.equals("null")?"":signFullname%>" required>
+                                <span class="form-message-password-confi form-message"><%= errorFullname.equals("null")?"":errorFullname%></span>
                             </div>
                             <div class="form-group">
                                 <label for="phone" class="form-label">Số điện thoại</label>
-                                <input type="text" id="phone" name="phone" placeholder="Nhập số điện thoại" class="form-control">
+                                <input type="text" id="phone" name="phoneSign" placeholder="Nhập số điện thoại" class="form-control" value="<%= signPhone.equals("null")?"":signPhone%>" required>
+                                <span class="form-message-password-confi form-message"><%= errorPhone.equals("null")?"":errorPhone%></span>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="form-label">Mật khẩu</label>
-                                <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" class="form-control">
+                                <input type="password" id="password" name="passwordSign" placeholder="Nhập mật khẩu" class="form-control" value="<%= signPassword.equals("null")?"":signPassword%>" required>
+                                <span class="form-message-password-confi form-message"><%= errorPassword.equals("null")?"":errorPassword%></span>
                             </div>
                             <div class="form-group">
                                 <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
-                                <input type="password" id="password_confirmation" name="password_confirmation" 
-                                    placeholder="Nhập lại mật khẩu" class="form-control">
-                                <span class="form-message-password-confi form-message"></span>
+                                <input type="password" id="password_confirmation" name="password_confirmationSign" 
+                                    placeholder="Nhập lại mật khẩu" class="form-control" value="" required>
+                                <span class="form-message-password-confi form-message"><%= errorPasswordConf.equals("null")?"":errorPasswordConf%></span>
                             </div>                    
-                            <div class="form-group">
+<!--                            <div class="form-group">
                                 <input type="checkbox" id="checkbox-signup" name="checkbox" required="">
                                 <label for="checkbox-signup" class="form-checkbox"><a href="#"
                                         target="_blank">Tôi đồng ý với chính sách cửa hàng</a></label>
                                 <p class="form-message-checkbox form-message"></p>
-                            </div>
+                            </div>-->
                             <button class="form-submit" id="signup-button">Đăng kí</button>
                         </form>
                         <p class="change-login">Bạn đã có tài khoản? <a href="javascript:;" class="login-link">Đăng nhập</a></p>

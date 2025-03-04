@@ -30,20 +30,13 @@ public class UserDAO implements IDAO<UserDTO, String>{
         Connection conn;
         try {
             conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, entity.getFullName());
             ps.setString(2, entity.getPhone());
             ps.setString(3, entity.getRoleID());
             ps.setString(4, entity.getPassword());
             int n = ps.executeUpdate();
-            if (n > 0) {
-            try (ResultSet rs = ps.getGeneratedKeys()) {
-                if (rs.next()) {
-                    entity.setUserID(rs.getInt(1));
-                }
-            }
-            return true;
-            }
+            return n > 0;
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
@@ -59,7 +52,27 @@ public class UserDAO implements IDAO<UserDTO, String>{
 
     @Override
     public UserDTO readById(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "SELECT * FROM tblUsers WHERE userID= ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                UserDTO user = new UserDTO(
+                        rs.getInt("userID"),
+                        rs.getString("fullName"),
+                        rs.getString("phone"),
+                        rs.getString("roleID"),
+                        rs.getString("password"));
+                return user;
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
     
     @Override
