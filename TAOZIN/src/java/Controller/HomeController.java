@@ -38,7 +38,7 @@ public class HomeController extends HttpServlet {
         ProductDAO productDAO = new ProductDAO();
         List<ProductDTO> productList = productDAO.readAll();
 
-        request.setAttribute("productList", productList);
+        request.getSession().setAttribute("productList", productList);
         request.getRequestDispatcher("main.jsp").include(request, response);
     }
 

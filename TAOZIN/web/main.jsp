@@ -4,6 +4,7 @@
     Author     : Naammm
 --%>
 
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="dto.ProductDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -54,8 +55,8 @@
                             <i class="fa-light fa-badge-check"></i>
                         </div>
                         <div class="home-service-item-content">
-                            <h4>BẢO HÀNH CHÍNH HÃNG</h4>
-                            <p class="home-service-item-content-desc">Đảm bảo quyền lợi khách hàng</p>
+                            <h4>CHÍNH HÃNG 100%</h4>
+                            <p class="home-service-item-content-desc">Cam kết chất lượng</p>
                         </div>
                     </div>
                     <div class="home-service-item">
@@ -90,28 +91,34 @@
                     <h2 class="home-title">iPhone</h2>
                 </div>
                 <%
-                    List<ProductDTO> productList = (List<ProductDTO>) request.getAttribute("productList");
+                    List<ProductDTO> productList = (List<ProductDTO>) session.getAttribute("productList");
+                    DecimalFormat df = new DecimalFormat("#,###");
                 %>
-                <div class="product-container">
+                <div class="home-products" id="home-products">
                     <% if (productList != null) { %>
                         <% for (ProductDTO product : productList) { %>
+                        <div class="col-product">
                             <div class="product-card">
-                                <img src="<%= product.getThumbnail() %>" alt="Product Image">
-                                <h2><%= product.getProductName() %></h2>
-                                <span>Giá: <%= product.getPrice() %> VNĐ</span>
-                                <div class="star">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
+                                <div class="product-image">
+                                    <img src="<%= product.getThumbnail() %>" alt="Product Image">
+                                    <span class="badge"><i class="fa-regular fa-truck"></i> Free shipping</span>
                                 </div>
-                                <a href="#"><i class="fa-solid fa-cart-shopping cart"></i></a>
+                                <div class="product-info">
+                                    <h2><%= product.getProductName() %></h2>
+                                    <p><%= product.getDescription()%></p>
+                                    <div class="product-price">
+                                        <span class="price"><%= df.format(product.getPrice()) %> VNĐ</span>
+                                        <span class="rating">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <button class="details-btn">Xem chi tiết</button>
+                                </div>
                             </div>
+                        </div>
                         <% } %>
                     <% } else { %>
-                        <p>Không có sản phẩm nào.</p>
+
                     <% } %>
+
                 </div>
             </div>
             

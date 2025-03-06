@@ -45,3 +45,14 @@ CREATE TABLE tblOrderItems (
 );
 
 ALTER TABLE tblProducts ADD thumbnail NVARCHAR(1024) NULL;
+
+INSERT INTO tblProducts (productName, description, price, stockQuantity, productView, categoryID, created_at, thumbnail) 
+VALUES 
+('iPhone 15 Pro Max', 'Màn hình 6.7 inch, chip A17 Pro, camera 48MP', 33990000, 10, 0, 1, GETDATE(), 'assets/image/iphone15promax.jpg'),
+('iPhone 15 Pro', 'Màn hình 6.1 inch, chip A17 Pro, camera 48MP', 29990000, 15, 0, 1, GETDATE(), 'assets/image/iphone15pro.jpg'),
+('iPhone 15', 'Màn hình 6.1 inch, chip A16 Bionic, camera 48MP', 22990000, 20, 0, 1, GETDATE(), 'assets/image/iphone15.jpg');
+
+INSERT INTO tblCategories (categoryName, thumbnail) 
+VALUES ('iPhone', 'assets/image/iphone15promax.jpg');
+
+SELECT * FROM tblProducts

@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginController", urlPatterns = {"/LoginController"})
 public class LoginController extends HttpServlet {
 
-    private static final String HOME_PAGE = "main.jsp";
+    private static final String HOME_PAGE = "HomeController";
     
     public UserDTO getUser(String strPhone) {
         UserDAO udao = new UserDAO();
