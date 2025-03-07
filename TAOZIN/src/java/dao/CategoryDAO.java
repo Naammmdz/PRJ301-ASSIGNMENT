@@ -21,7 +21,7 @@ import utils.DBUtils;
  *
  * @author Naammm
  */
-public class CategoryDao implements IDAO<CategoryDTO, Integer>{
+public class CategoryDAO implements IDAO<CategoryDTO, Integer>{
 
     @Override
     public boolean create(CategoryDTO entity) {
@@ -34,9 +34,9 @@ public class CategoryDao implements IDAO<CategoryDTO, Integer>{
             int n = ps.executeUpdate();
             return n > 0;
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -58,16 +58,16 @@ public class CategoryDao implements IDAO<CategoryDTO, Integer>{
                 cateList.add(Category);
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cateList;
     }
 
     @Override
     public CategoryDTO readById(Integer id) {
-         String sql = "SELECT * FROM tblCategories WHERE id = ?";
+         String sql = "SELECT * FROM tblCategories WHERE categoryID = ?";
          
          try {
             Connection conn = DBUtils.getConnection();
@@ -76,16 +76,16 @@ public class CategoryDao implements IDAO<CategoryDTO, Integer>{
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 CategoryDTO Category = new CategoryDTO(
-                        rs.getInt("id"),
+                        rs.getInt("categoryID"),
                         rs.getString("categoryName"),
                         rs.getString("thumbnail")
                 );
                 return Category;
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -102,9 +102,9 @@ public class CategoryDao implements IDAO<CategoryDTO, Integer>{
             int n = ps.executeUpdate();
             return n > 0;
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -120,9 +120,9 @@ public class CategoryDao implements IDAO<CategoryDTO, Integer>{
             int n = ps.executeUpdate();
             return n > 0;
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
@@ -149,9 +149,9 @@ public class CategoryDao implements IDAO<CategoryDTO, Integer>{
                 cateList.add(Category);
             }
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(CategoryDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CategoryDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return cateList;
     }

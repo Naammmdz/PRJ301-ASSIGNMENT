@@ -77,5 +77,66 @@ public class ProductDAO implements IDAO<ProductDTO, Integer>{
     public List<ProductDTO> search(String searchTerm) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    public List<ProductDTO> readByCategory(int categoryID) {
+        List<ProductDTO> productList = new ArrayList<>();
+        String sql = "SELECT * FROM tblProducts WHERE categoryID = ?";
+
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, categoryID);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ProductDTO product = new ProductDTO(
+                    rs.getInt("productID"),
+                    rs.getString("productName"),
+                    rs.getString("description"),
+                    rs.getDouble("price"),
+                    rs.getInt("stockQuantity"),
+                    rs.getInt("productView"),
+                    rs.getInt("categoryID"),
+                    rs.getString("created_at"),
+                    rs.getString("thumbnail")
+                );
+                productList.add(product);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return productList;
+    }
+    
+    public List<ProductDTO> readHot() {
+        List<ProductDTO> productList = new ArrayList<>();
+        String sql = "SELECT TOP 7 * FROM tblProducts ORDER BY created_at DESC";
+
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ProductDTO product = new ProductDTO(
+                    rs.getInt("productID"),
+                    rs.getString("productName"),
+                    rs.getString("description"),
+                    rs.getDouble("price"),
+                    rs.getInt("stockQuantity"),
+                    rs.getInt("productView"),
+                    rs.getInt("categoryID"),
+                    rs.getString("created_at"),
+                    rs.getString("thumbnail")
+                );
+                productList.add(product);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return productList;
+    }
     
 }
+
+

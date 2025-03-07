@@ -441,11 +441,27 @@ header {
 
 .home-title-block {
     padding: 0 10px 10px;
-    scroll-margin-top: 80px;
+    scroll-margin-top: 80px; 
 }
 
-.home-title-block h2 {
-    color: var(--blue);
+.home-title {
+    font-weight: 600;
+    text-align: center;
+    font-size: 21px;
+    position: relative;
+    text-transform: uppercase;
+    margin-top: 30px;
+}
+
+.home-title::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    background-color: var(--blue);
+    width: 25%;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: -5px;
 }
 
 .home-banner {
@@ -1229,4 +1245,82 @@ label a {
 .details-btn:hover {
     background: #333;
     color: white;
+}
+
+.no-result {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.no-result-h {
+    font-size: 25px;
+    margin: 10px;
+}
+
+.no-result-p {
+    width: 100%;
+    color: #757575;
+    text-align: center;
+}
+
+.no-result i {
+    color: #757575;
+    font-size: 80px;
+    margin-top: 30px;
+}
+
+.more-products {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.more-products a {
+    font-size: 18px;
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.more-products a:hover {
+    color: var(--blue);
+    transform: scale(1.1);
+}
+
+/* Breadcrumbs */
+.breadcrumb {
+    display: flex;
+    list-style: none;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.breadcrumb li {
+    margin-right: 8px;
+}
+
+.breadcrumb li::after {
+    content: "›";
+    margin-left: 8px;
+    color: var(--text-color);
+}
+
+.breadcrumb li:last-child::after {
+    content: "";
+}
+
+.breadcrumb a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.breadcrumb a:visited {
+    color: var(--text-color);
 }

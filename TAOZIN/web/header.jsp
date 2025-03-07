@@ -24,11 +24,11 @@
                     <span class="text-dm"><i class="fa-light fa-bars"></i> Danh mục</span>
                 </div>
                 <ul class="header-left-menu">
-                    <li><a class="dropdown-item" href="#">iPhone</a></li>
-                    <li><a class="dropdown-item" href="#">iPad</a></li>
-                    <li><a class="dropdown-item" href="#">Macbook</a></li>
-                    <li><a class="dropdown-item" href="#">Âm thanh</a></li>
-                    <li><a class="dropdown-item" href="#">Phụ kiện</a></li>
+                    <li><a class="dropdown-item" href="CategoryController?categoryID=1">iPhone</a></li>
+                    <li><a class="dropdown-item" href="CategoryController?categoryID=2">iPad</a></li>
+                    <li><a class="dropdown-item" href="CategoryController?categoryID=3">Macbook</a></li>
+                    <li><a class="dropdown-item" href="CategoryController?categoryID=4">Âm thanh</a></li>
+                    <li><a class="dropdown-item" href="CategoryController?categoryID=5">Phụ kiện</a></li>
                     <li><a class="dropdown-item" href="#">Khuyến mãi</a></li>
                     <li><a class="dropdown-item" href="#">Chính sách bảo hành</a></li>
                 </ul>
