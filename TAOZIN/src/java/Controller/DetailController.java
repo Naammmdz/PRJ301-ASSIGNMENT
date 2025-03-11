@@ -1,15 +1,19 @@
+package Controller;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
 
+import dao.CategoryDAO;
 import dao.ProductDAO;
+import dto.CategoryDTO;
 import dto.ProductDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,8 +24,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Naammm
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/HomeController"})
-public class HomeController extends HttpServlet {
+@WebServlet(urlPatterns = {"/DetailController"})
+public class DetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,19 +39,22 @@ public class HomeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        ProductDAO productDAO = new ProductDAO();
-        List<ProductDTO> iphoneList = productDAO.readByCategory(1);
-        List<ProductDTO> ipadList = productDAO.readByCategory(2);
-        List<ProductDTO> macbookList = productDAO.readByCategory(3);
-        List<ProductDTO> audioList = productDAO.readByCategory(4);
-        List<ProductDTO> accessoryList = productDAO.readByCategory(5);
+        try {
+            int productID = Integer.parseInt(request.getParameter("productID"));
+            ProductDAO pdao = new ProductDAO();
+            CategoryDAO cdao =new CategoryDAO();
 
-        request.setAttribute("iphoneList", iphoneList);
-        request.setAttribute("ipadList", ipadList);
-        request.setAttribute("macbookList", macbookList);
-        request.setAttribute("audioList", audioList);
-        request.setAttribute("accessoryList", accessoryList);
-        request.getRequestDispatcher("main.jsp").include(request, response);
+            ProductDTO productDetail = pdao.readById(productID);
+            CategoryDTO cdto = cdao.readById(productDetail.getCategoryID());
+            List<ProductDTO> productList = pdao.readByCategory(productDetail.getCategoryID());
+            request.setAttribute("category", cdto);
+            request.setAttribute("productDetail", productDetail);
+            request.setAttribute("productList", productList);
+        } catch (Exception e) {
+        }finally {
+            RequestDispatcher rd = request.getRequestDispatcher("detail.jsp");
+            rd.forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -90,4 +97,3 @@ public class HomeController extends HttpServlet {
     }// </editor-fold>
 
 }
-

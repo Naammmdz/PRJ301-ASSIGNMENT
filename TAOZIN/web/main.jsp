@@ -8,6 +8,7 @@
 <%@page import="dto.ProductDTO"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -91,12 +92,12 @@
                     <h2 class="home-title">iPhone</h2>
                 </div>
                 <%
-                    List<ProductDTO> productList = (List<ProductDTO>) request.getAttribute("productList");
+                    List<ProductDTO> iphoneList = (List<ProductDTO>) request.getAttribute("iphoneList");
                     DecimalFormat df = new DecimalFormat("#,###");
                 %>
                 <div class="home-products" id="home-products">
-                    <% if (productList != null) { %>
-                        <% for (ProductDTO product : productList) { %>
+                    <% if (iphoneList != null) { %>
+                        <% for (ProductDTO product : iphoneList) { %>
                         <div class="col-product">
                             <div class="product-card">
                                 <div class="product-image">
@@ -110,7 +111,10 @@
                                         <span class="price"><%= df.format(product.getPrice()) %> VNĐ</span>
                                         <span class="rating">⭐⭐⭐⭐⭐</span>
                                     </div>
-                                    <button class="details-btn">Xem chi tiết</button>
+                                    <form action="DetailController" method="GET">
+                                        <input type="hidden" name="productID" value="<%= product.getProductID() %>">
+                                        <button type="submit" class="details-btn">Xem chi tiết</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -133,14 +137,185 @@
                 <div class="home-title-block" id="home-title">
                     <h2 class="home-title">iPad</h2>
                 </div>
-                    
+                  <%
+                    List<ProductDTO> ipadList = (List<ProductDTO>) request.getAttribute("ipadList");
+                %>
+                <div class="home-products" id="home-products">
+                    <% if (ipadList != null) { %>
+                        <% for (ProductDTO product : ipadList) { %>
+                        <div class="col-product">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="<%= product.getThumbnail() %>" alt="Product Image">
+                                    <span class="badge"><i class="fa-regular fa-truck"></i> Free shipping</span>
+                                </div>
+                                <div class="product-info">
+                                    <h2><%= product.getProductName() %></h2>
+                                    <p><%= product.getDescription()%></p>
+                                    <div class="product-price">
+                                        <span class="price"><%= df.format(product.getPrice()) %> VNĐ</span>
+                                        <span class="rating">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <form action="DetailController" method="GET">
+                                        <input type="hidden" name="productID" value="<%= product.getProductID() %>">
+                                        <button type="submit" class="details-btn">Xem chi tiết</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    <div class="col-product more-products">
+                        <a href="CategoryController?categoryID=2">
+                            <span>Xem thêm </span>
+                            <i class="fa-light fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <% } else { %>
+                            <div class="no-result">
+                                <div class="no-result-h">Tìm kiếm không có kết quả</div>
+                                <div class="no-result-p">Xin lỗi, chúng tôi không thể tìm được kết quả hợp với tìm kiếm của bạn</div>
+                                <div class="no-result-i"><i class="fa-light fa-face-sad-cry"></i></div>
+                            </div>
+                    <% } %>
+                </div>
+                
+                
                 <div class="home-title-block" id="home-title">
                     <h2 class="home-title">Macbook</h2>
                 </div>
-                    
+                 <%
+                    List<ProductDTO> macbookList = (List<ProductDTO>) request.getAttribute("macbookList");
+                %>
+                <div class="home-products" id="home-products">
+                    <% if (iphoneList != null) { %>
+                        <% for (ProductDTO product : macbookList) { %>
+                        <div class="col-product">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="<%= product.getThumbnail() %>" alt="Product Image">
+                                    <span class="badge"><i class="fa-regular fa-truck"></i> Free shipping</span>
+                                </div>
+                                <div class="product-info">
+                                    <h2><%= product.getProductName() %></h2>
+                                    <p><%= product.getDescription()%></p>
+                                    <div class="product-price">
+                                        <span class="price"><%= df.format(product.getPrice()) %> VNĐ</span>
+                                        <span class="rating">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <form action="DetailController" method="GET">
+                                        <input type="hidden" name="productID" value="<%= product.getProductID() %>">
+                                        <button type="submit" class="details-btn">Xem chi tiết</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    <div class="col-product more-products">
+                        <a href="CategoryController?categoryID=3">
+                            <span>Xem thêm </span>
+                            <i class="fa-light fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <% } else { %>
+                            <div class="no-result">
+                                <div class="no-result-h">Tìm kiếm không có kết quả</div>
+                                <div class="no-result-p">Xin lỗi, chúng tôi không thể tìm được kết quả hợp với tìm kiếm của bạn</div>
+                                <div class="no-result-i"><i class="fa-light fa-face-sad-cry"></i></div>
+                            </div>
+                    <% } %>
+                </div>
+                
+                <div class="home-title-block" id="home-title">
+                    <h2 class="home-title">Âm thanh</h2>
+                </div>
+                 <%
+                    List<ProductDTO> audioList = (List<ProductDTO>) request.getAttribute("audioList");
+                %>
+                <div class="home-products" id="home-products">
+                    <% if (audioList != null) { %>
+                        <% for (ProductDTO product : audioList) { %>
+                        <div class="col-product">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="<%= product.getThumbnail() %>" alt="Product Image">
+                                    <span class="badge"><i class="fa-regular fa-truck"></i> Free shipping</span>
+                                </div>
+                                <div class="product-info">
+                                    <h2><%= product.getProductName() %></h2>
+                                    <p><%= product.getDescription()%></p>
+                                    <div class="product-price">
+                                        <span class="price"><%= df.format(product.getPrice()) %> VNĐ</span>
+                                        <span class="rating">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <form action="DetailController" method="GET">
+                                        <input type="hidden" name="productID" value="<%= product.getProductID() %>">
+                                        <button type="submit" class="details-btn">Xem chi tiết</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    <div class="col-product more-products">
+                        <a href="CategoryController?categoryID=4">
+                            <span>Xem thêm </span>
+                            <i class="fa-light fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <% } else { %>
+                            <div class="no-result">
+                                <div class="no-result-h">Tìm kiếm không có kết quả</div>
+                                <div class="no-result-p">Xin lỗi, chúng tôi không thể tìm được kết quả hợp với tìm kiếm của bạn</div>
+                                <div class="no-result-i"><i class="fa-light fa-face-sad-cry"></i></div>
+                            </div>
+                    <% } %>
+                </div>
+                             
                 <div class="home-title-block" id="home-title">
                     <h2 class="home-title">Phụ kiện</h2>
                 </div>
+                 <%
+                    List<ProductDTO> accessoryList = (List<ProductDTO>) request.getAttribute("accessoryList");
+                %>
+                <div class="home-products" id="home-products">
+                    <% if (accessoryList != null) { %>
+                        <% for (ProductDTO product : accessoryList) { %>
+                        <div class="col-product">
+                            <div class="product-card">
+                                <div class="product-image">
+                                    <img src="<%= product.getThumbnail() %>" alt="Product Image">
+                                    <span class="badge"><i class="fa-regular fa-truck"></i> Free shipping</span>
+                                </div>
+                                <div class="product-info">
+                                    <h2><%= product.getProductName() %></h2>
+                                    <p><%= product.getDescription()%></p>
+                                    <div class="product-price">
+                                        <span class="price"><%= df.format(product.getPrice()) %> VNĐ</span>
+                                        <span class="rating">⭐⭐⭐⭐⭐</span>
+                                    </div>
+                                    <form action="DetailController" method="GET">
+                                        <input type="hidden" name="productID" value="<%= product.getProductID() %>">
+                                        <button type="submit" class="details-btn">Xem chi tiết</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <% } %>
+                    <div class="col-product more-products">
+                        <a href="CategoryController?categoryID=5">
+                            <span>Xem thêm </span>
+                            <i class="fa-light fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <% } else { %>
+                            <div class="no-result">
+                                <div class="no-result-h">Tìm kiếm không có kết quả</div>
+                                <div class="no-result-p">Xin lỗi, chúng tôi không thể tìm được kết quả hợp với tìm kiếm của bạn</div>
+                                <div class="no-result-i"><i class="fa-light fa-face-sad-cry"></i></div>
+                            </div>
+                    <% } %>
+                </div>
+                
+                
             </div>
             
             

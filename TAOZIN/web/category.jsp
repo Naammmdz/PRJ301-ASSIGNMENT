@@ -9,6 +9,7 @@
 <%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -28,9 +29,6 @@
                         <li><a href="index.jsp">Trang chủ</a></li>
                         <c:if test="${not empty requestScope.category}">
                             <li><a href="CategoryController?categoryID=${category.categoryID}">${category.categoryName}</a></li>
-                        </c:if>
-                        <c:if test="${not empty param.product}">
-                            <li class="active">${param.product}</li>
                         </c:if>
                     </ul>
                 </nav>
@@ -54,7 +52,10 @@
                                         <span class="price"><%= df.format(product.getPrice()) %> VNĐ</span>
                                         <span class="rating">⭐⭐⭐⭐⭐</span>
                                     </div>
-                                    <button class="details-btn">Xem chi tiết</button>
+                                    <form action="DetailController" method="GET">
+                                        <input type="hidden" name="productID" value="<%= product.getProductID() %>">
+                                        <button type="submit" class="details-btn">Xem chi tiết</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +71,7 @@
             </div>
         </main>
         <%@include file="footer.jsp" %>
-        <%@include file="lst.jsp" %>
+        <%@include file="lst.jsp" %> 
         <%@include file="scrollup.jsp" %>
         <script src="js/main.js"></script>
     </body>
