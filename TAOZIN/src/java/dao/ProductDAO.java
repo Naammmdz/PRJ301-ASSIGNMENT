@@ -100,7 +100,37 @@ public class ProductDAO implements IDAO<ProductDTO, Integer>{
 
     @Override
     public List<ProductDTO> search(String searchTerm) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<ProductDTO> result = new ArrayList<>();
+    String sql = "SELECT * FROM tblProducts WHERE productName LIKE ? OR description LIKE ? OR productID LIKE ?";
+
+    try (Connection conn = DBUtils.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        String param = "%" + searchTerm + "%";
+        ps.setString(1, param);
+        ps.setString(2, param);
+        ps.setString(3, param);
+
+        try (ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                ProductDTO product = new ProductDTO(
+                        rs.getInt("productID"),
+                        rs.getString("productName"),
+                        rs.getString("description"),
+                        rs.getDouble("price"),
+                        rs.getInt("stockQuantity"),
+                        rs.getInt("productView"),
+                        rs.getInt("categoryID"),
+                        rs.getString("created_at"),
+                        rs.getString("thumbnail")
+                );
+                result.add(product);
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return result;
     }
 
     public List<ProductDTO> readByCategory(int categoryID) {
@@ -191,6 +221,8 @@ public class ProductDAO implements IDAO<ProductDTO, Integer>{
         }
         return productList;
     }
+    
+    
     
 }
 

@@ -38,8 +38,8 @@
 
         <div class="header-center">
             <!-- SEARCH -->
-            <form action="SearchServlet" method="GET" class="form-search">
-                <input type="text" class="form-search-input" placeholder="Tìm kiếm sản phẩm...">
+            <form action="SearchController" method="GET" class="form-search">
+                <input type="text" name="searchTerm" class="form-search-input" placeholder="Tìm kiếm sản phẩm..." <c:if test="${not empty requestScope.searchTerm}">value="${searchTerm}"</c:if>>
                 <span class="search-btn"><i class="fa-light fa-magnifying-glass"></i></span>
             </form>              
         </div>
@@ -69,7 +69,7 @@
                         <% if (user.getRoleID().equals("AD")) { %>
                             <li><a href="./admin.html"><i class="fa-light fa-gear"></i> Quản lý cửa hàng</a></li>
                         <% } %>
-                        <li><a href="javascript:;" onclick="myAccount()"><i class="fa-light fa-circle-user"></i> Tài khoản của tôi</a></li>
+                        <li><a href="user.jsp"><i class="fa-light fa-circle-user"></i> Tài khoản của tôi</a></li>
                         <li><a href="javascript:;" onclick="orderHistory()"><i class="fa-regular fa-bags-shopping"></i> Đơn hàng đã mua</a></li>
                         <li class="border"><a href="MainController?action=logout"><i class="fa-light fa-right-from-bracket"></i> Thoát tài khoản</a></li>
                     </ul>
@@ -84,10 +84,10 @@
                     <% } %>
                 </li>
 
-                <li class="header-right-item open" onclick="openCart()">
+                <li class="header-right-item open" onclick="window.location.href='CartController'">
                     <div class="cart-icon-menu">
                         <i class="fa-light fa-cart-shopping"></i>
-                        <span class="count-product-cart">0</span>
+                        <span class="count-product-cart">${totalQuantity}</span>
                     </div>
                     <span>Giỏ hàng</span>
                 </li>

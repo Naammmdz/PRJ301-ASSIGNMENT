@@ -5,6 +5,8 @@
  */
 package dto;
 
+import dao.ProductDAO;
+
 /**
  *
  * @author Naammm
@@ -67,6 +69,8 @@ public class OrderItemDTO {
         this.productID = productID;
     }
 
-    
+    public ProductDTO getProduct() {
+        return new ProductDAO().readById(this.productID);
+    }
     
 }

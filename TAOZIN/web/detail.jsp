@@ -37,7 +37,11 @@
                     </ul>
                 </nav>
                 
-                <section class="detail">
+                <form class="detail" action="CartController" name="action" method="POST">
+                    <input type="hidden" name="action" value="create">
+<!--                    <input type="hidden" name="quantity" value="${productDetail.stockQuantity}">-->
+                    <input type="hidden" name="productId" value="${productDetail.productID}">
+                    <input type="hidden" name="productPrice" value="${productDetail.price}">
                     <div class="image">
                         <img src="${productDetail.thumbnail}" alt="">
                     </div>
@@ -47,7 +51,7 @@
                         <p class="price"><fmt:formatNumber value="${productDetail.price}" type="number" pattern="#,###"/> VNĐ</p>
 
                         <div class="buttons">
-                            <button class="checkout-btn">Mua ngay</button>
+                            <input class="quantity-btn" type="number" name="quantity" value="1" min="1">
                             <button class="cart-btn">
                                 Thêm vào giỏ hàng 
                                 <span><i class="fa-light fa-cart-shopping"></i></span>
@@ -58,7 +62,7 @@
                             ${productDetail.description}
                         </p>
                     </div>
-                </section>
+                </form>
                         
                 <div class="similar-title-block" id="similar-title">
                     <h2 class="similar-title">Sản phẩm tương tự</h2>
