@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.PasswordUtils;
 
 /**
  *
@@ -25,7 +26,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "SignupController", urlPatterns = {"/SignupController"})
 public class SignupController extends HttpServlet {
 
-    private static final String HOME_PAGE = "main.jsp";
+    private static final String HOME_PAGE = "HomeController";
     
     public UserDTO getUser(String strPhone) {
         UserDAO udao = new UserDAO();
@@ -51,6 +52,8 @@ public class SignupController extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         String url = HOME_PAGE;
         try {
@@ -61,7 +64,7 @@ public class SignupController extends HttpServlet {
             } else {
                 if (action.equals("signup")) {
                     boolean checkError = false;
-                    String strFullname = request.getParameter("fullnameSign");
+                    String strFullname = request.getParameter("fullnameSign");System.out.println(strFullname);
                     String strPhone = request.getParameter("phoneSign");
                     String strPassword = request.getParameter("passwordSign");
                     String strPasswordConf = request.getParameter("password_confirmationSign");
@@ -107,7 +110,7 @@ public class SignupController extends HttpServlet {
                         session.setAttribute("signPassword", strPassword);
                     }
                     
-                    UserDTO user = new UserDTO(0, strFullname, strPhone, "US", strPassword);
+                    UserDTO user = new UserDTO(0, strFullname, strPhone, "US", PasswordUtils.hashPassword(strPassword), null, null);
                     if (!checkError) {
 
                         UserDAO udao = new UserDAO();

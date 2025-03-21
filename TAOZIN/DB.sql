@@ -78,3 +78,6 @@ VALUES
 ('MacBook Air 15 M2', 'Màn hình 15 inch, chip M2, RAM 8GB, SSD 256GB', 31990000, 20, 90, 3, GETDATE(), 'assets/image/macbook_air_15_m2.jpg'),
 ('MacBook Air 13 M2', 'Màn hình 13.6 inch, chip M2, RAM 8GB, SSD 256GB', 26990000, 25, 95, 3, GETDATE(), 'assets/image/macbook_air_13_m2.jpg');
 
+ALTER TABLE tblUsers 
+ADD email VARCHAR(100) NULL,
+    address NVARCHAR(255) NULL;

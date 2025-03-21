@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.AuthUtils;
 
 /**
  *
@@ -54,7 +55,7 @@ public class LoginController extends HttpServlet {
                     String strPhone = request.getParameter("phone");
                     String strPassword = request.getParameter("password");
                     HttpSession session = request.getSession();
-                    if(isValidLogin(strPhone, strPassword)){
+                    if(AuthUtils.isValidLogin(strPhone, strPassword)){
                         url = HOME_PAGE;
                         UserDTO user = getUser(strPhone);
                         session.setAttribute("user", user);
