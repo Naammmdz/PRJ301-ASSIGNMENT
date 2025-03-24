@@ -42,7 +42,7 @@
                                 <input type="hidden" name="action" value="info">
                                 <div class="form-group">
                                     <label for="infoname" class="form-label">Họ và tên</label>
-                                    <input class="form-control" type="text" name="txtFullName" value="${user.fullName}" placeholder="">
+                                    <input class="form-control" type="text" name="txtFullName" value="${user.fullName}" placeholder=""><br>
                                     <c:if test="${not empty requestScope.txtFullName_error}">
                                         <span class="form-message">${requestScope.txtFullName_error}</span>
                                     </c:if>
@@ -50,12 +50,12 @@
                                 <div class="form-group">
                                     <label for="infophone" class="form-label">Số điện thoại</label>
                                     <input class="form-control" type="text" name="txtPhone" id="infophone" disabled="true"
-                                        value="${user.phone}">
+                                        value="${user.phone}"><br>
                                 </div>
                                 <div class="form-group">
                                     <label for="infoemail" class="form-label">Email</label>
                                     <input class="form-control" type="email" name="txtEmail" id="infoemail"
-                                        value="${not empty user.email ? user.email : ''}" placeholder="Thêm địa chỉ email của bạn">
+                                        value="${not empty user.email ? user.email : ''}" placeholder="Thêm địa chỉ email của bạn"><br>
                                     <c:if test="${not empty requestScope.txtEmail_error}">
                                         <span class="form-message">${requestScope.txtEmail_error}</span>
                                     </c:if>
@@ -63,7 +63,7 @@
                                 <div class="form-group">
                                     <label for="infoaddress" class="form-label">Địa chỉ</label>
                                     <input class="form-control" type="text" name="txtAddress" id="infoaddress"
-                                        value="${not empty user.address ? user.address : ''}" placeholder="Thêm địa chỉ giao hàng của bạn">
+                                        value="${not empty user.address ? user.address : ''}" placeholder="Thêm địa chỉ giao hàng của bạn"><br>
                                     <c:if test="${not empty requestScope.txtUserAddress_error}">
                                         <span class="form-message">${requestScope.txtUserAddress_error}</span>
                                     </c:if>
@@ -71,25 +71,25 @@
                             </form>
                         </div>
                         <div class="main-account-body-col">
-                            <form  id="form2" action="" class="change-password">
+                            <form  id="form2" action="UserController" class="change-password" method="POST">
                                 <input type="hidden" name="action" value="change">
                                 <div class="form-group">
                                     <label for="" class="form-label w60">Mật khẩu hiện tại</label>
-                                    <input class="form-control" type="password" name="" id="password-cur-info"
-                                        placeholder="Nhập mật khẩu hiện tại">
-                                    <span class="password-cur-info-error form-message"></span>
+                                    <input class="form-control" type="password" name="oldPassword"
+                                           placeholder="Nhập mật khẩu hiện tại"><br>
+                                    <span class="password-cur-info-error form-message">${requestScope.oldPassword_error}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="form-label w60">Mật khẩu mới </label>
-                                    <input class="form-control" type="password" name="" id="password-after-info"
-                                        placeholder="Nhập mật khẩu mới">
-                                    <span class="password-after-info-error form-message"></span>
+                                    <input class="form-control" type="password" name="newPassword"
+                                        placeholder="Nhập mật khẩu mới"><br>
+                                    <span class="form-message">${requestScope.newPassword_error}</span>
                                 </div>
                                 <div class="form-group">
                                     <label for="" class="form-label w60">Xác nhận mật khẩu mới</label>
-                                    <input class="form-control" type="password" name="" id="password-comfirm-info"
-                                        placeholder="Nhập lại mật khẩu mới">
-                                    <span class="password-after-comfirm-error form-message"></span>
+                                    <input class="form-control" type="password" name="confirmPassword"
+                                        placeholder="Nhập lại mật khẩu mới"><br>
+                                    <span class="form-message">${requestScope.confirmPassword_error}</span>
                                 </div>
                             </form>
                         </div>

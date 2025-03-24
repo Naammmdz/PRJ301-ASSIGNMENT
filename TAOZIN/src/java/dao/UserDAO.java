@@ -187,4 +187,36 @@ public class UserDAO implements IDAO<UserDTO, String>{
         return null;
     }
     
+    
+    public String getPasswordByUserID(int userID) {
+        String sql = "SELECT password FROM tblUsers WHERE userID = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("password");
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public boolean updatePassword(int userID, String hashedPassword) {
+        String sql = "UPDATE tblUsers SET password = ? WHERE userID = ?";
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, hashedPassword);
+            ps.setInt(2, userID);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
 }

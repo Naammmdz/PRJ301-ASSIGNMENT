@@ -5,26 +5,34 @@
  */
 package dto;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author Naammm
  */
-public class OrdersDTO {
+public class OrderDTO {
     private int orderID;
     private String code;
     private String status;
     private int userID;
-    private String createdAt;
+    private Timestamp createdAt;
 
-    public OrdersDTO() {
+    public OrderDTO() {
     }
 
-    public OrdersDTO(int orderID, String code, String status, int userID, String createdAt) {
+    public OrderDTO(int orderID, String code, String status, int userID, Timestamp createdAt) {
         this.orderID = orderID;
         this.code = code;
         this.status = status;
         this.userID = userID;
         this.createdAt = createdAt;
+    }
+    
+    public OrderDTO(String code, String status, int userID) {
+        this.code = code;
+        this.status = status;
+        this.userID = userID;
     }
 
     public int getOrderID() {
@@ -59,11 +67,11 @@ public class OrdersDTO {
         this.userID = userID;
     }
 
-    public String getCreatedAt() {
+    public Timestamp getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
     

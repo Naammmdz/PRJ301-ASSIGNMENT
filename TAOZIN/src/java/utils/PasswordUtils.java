@@ -16,7 +16,10 @@ import java.util.List;
  * @author tungi
  */
 public class PasswordUtils {
-
+    public static boolean verifyPassword(String oldPassword, String storedPassword) {
+        return hashPassword(oldPassword).equals(storedPassword);
+    }
+    
     public static String hashPassword(String plainPassword) {
         try {
             // Tạo MessageDigest với thuật toán SHA-256

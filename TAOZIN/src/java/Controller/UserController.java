@@ -93,12 +93,62 @@ public class UserController extends HttpServlet {
                         session.setAttribute("toastType", "error");
                         request.getRequestDispatcher(url).forward(request, response);
                     }
+                } else if ("change".equals(action)) {
+                    String url = "user.jsp";
+                    String oldPassword = request.getParameter("oldPassword");
+                    String newPassword = request.getParameter("newPassword");
+                    String confirmPassword = request.getParameter("confirmPassword");
+                    
+                    boolean hasError = false;
+                    
+                    if (oldPassword == null || oldPassword.trim().isEmpty()) {
+                        request.setAttribute("oldPassword_error", "Vui lòng nhập mật khẩu cũ.");
+                        hasError = true;
+                    }
+                    
+                    if (newPassword == null || newPassword.length() < 6) {
+                        request.setAttribute("newPassword_error", "Mật khẩu mới phải có ít nhất 6 ký tự.");
+                        hasError = true;
+                    }
+                    
+                    if (!newPassword.equals(confirmPassword)) {
+                        request.setAttribute("confirmPassword_error", "Mật khẩu xác nhận không khớp.");
+                        hasError = true;
+                    }
+                    
+                    if (hasError) {
+                        request.getRequestDispatcher(url).forward(request, response);
+                        return;
+                    }
+                    
+                    UserDAO userDAO = new UserDAO();
+                    String storedPassword = userDAO.getPasswordByUserID(user.getUserID());
+                    System.out.println(oldPassword);
+                    System.out.println(storedPassword);
+                    if (!PasswordUtils.verifyPassword(oldPassword, storedPassword)) {
+                        request.setAttribute("oldPassword_error", "Mật khẩu cũ không đúng.");
+                        request.getRequestDispatcher(url).forward(request, response);
+                        return;
+                    }
+                    
+                    String hashedPassword = PasswordUtils.hashPassword(newPassword);
+                    boolean result = userDAO.updatePassword(user.getUserID(), hashedPassword);
+                    
+                    if (result) {
+                        session.setAttribute("toastMessage", "Đổi mật khẩu thành công!");
+                        session.setAttribute("toastType", "success");
+                    } else {
+                        session.setAttribute("toastMessage", "Đổi mật khẩu thất bại!");
+                        session.setAttribute("toastType", "error");
+                    }
+                    
+                    request.getRequestDispatcher(url).forward(request, response);
                 }
             } else {
                 response.sendRedirect("HomeController");
             }
         } catch (Exception e) {
-            log("Error : " + e.toString());
+            e.printStackTrace();
         }
     }
 

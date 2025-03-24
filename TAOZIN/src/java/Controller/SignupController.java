@@ -127,7 +127,7 @@ public class SignupController extends HttpServlet {
         } catch (Exception e) {
             log("Error at MainController: " + e.toString());
         }finally {
-            response.sendRedirect(HOME_PAGE);;
+            response.sendRedirect(HOME_PAGE);
         }
     }
 
