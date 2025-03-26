@@ -38,6 +38,8 @@ public class DetailController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
+        response.setCharacterEncoding("UTF-8");
         response.setContentType("text/html;charset=UTF-8");
         try {
             int productID = Integer.parseInt(request.getParameter("productID"));
@@ -45,11 +47,16 @@ public class DetailController extends HttpServlet {
             CategoryDAO cdao =new CategoryDAO();
 
             ProductDTO productDetail = pdao.readById(productID);
-            CategoryDTO cdto = cdao.readById(productDetail.getCategoryID());
-            List<ProductDTO> productList = pdao.readByCategory(productDetail.getCategoryID());
-            request.setAttribute("category", cdto);
-            request.setAttribute("productDetail", productDetail);
-            request.setAttribute("productList", productList);
+            if (productDetail != null) {
+                productDetail.setImageUrls(pdao.getProductImages(productID));
+                CategoryDTO cdto = cdao.readById(productDetail.getCategoryID());
+                List<ProductDTO> productList = pdao.readByCategory(productDetail.getCategoryID());
+                
+                request.setAttribute("category", cdto);
+                request.setAttribute("productDetail", productDetail);
+                request.setAttribute("productList", productList);
+            }
+            
         } catch (Exception e) {
         }finally {
             RequestDispatcher rd = request.getRequestDispatcher("detail.jsp");

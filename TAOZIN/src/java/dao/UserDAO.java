@@ -49,7 +49,7 @@ public class UserDAO implements IDAO<UserDTO, String>{
     @Override
     public List<UserDTO> readAll() {
         List<UserDTO> list = new ArrayList<>();
-        String sql = "SELECT * FROM [tblUsers];";
+        String sql = "SELECT * FROM [tblUsers]";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -155,12 +155,50 @@ public class UserDAO implements IDAO<UserDTO, String>{
 
     @Override
     public boolean delete(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE FROM [tblUsers] WHERE [userID] = ?";
+        Connection conn;
+        try {
+            conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, id);
+            int n = ps.executeUpdate();
+            return n > 0;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override
     public List<UserDTO> search(String searchTerm) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<UserDTO> list = new ArrayList<>();
+        String sql = "SELECT * FROM [tblUsers] WHERE fullName LIKE ? OR phone LIKE ? OR email LIKE ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            String searchPattern = "%" + searchTerm + "%";
+            ps.setString(1, searchPattern);
+            ps.setString(2, searchPattern);
+            ps.setString(3, searchPattern);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                UserDTO user = new UserDTO(
+                        rs.getInt("userID"),
+                        rs.getString("fullName"),
+                        rs.getString("phone"),
+                        rs.getString("roleID"),
+                        rs.getString("password"),
+                        rs.getString("email"),
+                        rs.getString("address")
+                );
+                list.add(user);
+            }
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return list;
     }
 
     public UserDTO findByEmail(String email) {
@@ -219,4 +257,5 @@ public class UserDAO implements IDAO<UserDTO, String>{
         }
         return false;
     }
+
 }

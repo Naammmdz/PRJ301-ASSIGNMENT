@@ -5,7 +5,9 @@
  */
 package dto;
 
+import dao.UserDAO;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  *
@@ -17,6 +19,7 @@ public class OrderDTO {
     private String status;
     private int userID;
     private Timestamp createdAt;
+    private List<OrderItemDTO> orderItems;
 
     public OrderDTO() {
     }
@@ -74,6 +77,26 @@ public class OrderDTO {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
+
+    public List<OrderItemDTO> getOrderItems() {
+        return orderItems;
+    }
+
+    public void setOrderItems(List<OrderItemDTO> orderItems) {
+        this.orderItems = orderItems;
+    }
     
+    public double getTotalAmount() {
+        double total = 0;
+        for (OrderItemDTO item : orderItems) {
+            total += item.getPrice() * item.getQuantity();
+        }
+        return total;
+    }
     
+    public String getUserPhone() {
+        UserDAO userDAO = new UserDAO();
+        UserDTO user = userDAO.readById(String.valueOf(this.userID));
+        return (user != null) ? user.getPhone() : "Không có dữ liệu";
+    }
 }

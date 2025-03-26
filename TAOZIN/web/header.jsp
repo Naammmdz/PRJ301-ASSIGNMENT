@@ -67,10 +67,10 @@
                     </div>    
                     <ul class="header-right-menu">
                         <% if (user.getRoleID().equals("AD")) { %>
-                            <li><a href="./admin.html"><i class="fa-light fa-gear"></i> Quản lý cửa hàng</a></li>
+                            <li><a href="dashboard.jsp"><i class="fa-light fa-gear"></i> Quản lý cửa hàng</a></li>
                         <% } %>
                         <li><a href="user.jsp"><i class="fa-light fa-circle-user"></i> Tài khoản của tôi</a></li>
-                        <li><a href="javascript:;" onclick="orderHistory()"><i class="fa-regular fa-bags-shopping"></i> Đơn hàng đã mua</a></li>
+                        <li><a href="OrderHistoryController?userID=${sessionScope.user.userID}"><i class="fa-regular fa-bags-shopping"></i> Đơn hàng đã mua</a></li>
                         <li class="border"><a href="MainController?action=logout"><i class="fa-light fa-right-from-bracket"></i> Thoát tài khoản</a></li>
                     </ul>
                         <% } else { %>
@@ -87,7 +87,14 @@
                 <li class="header-right-item open" onclick="window.location.href='CartController'">
                     <div class="cart-icon-menu">
                         <i class="fa-light fa-cart-shopping"></i>
-                        <span class="count-product-cart">${totalQuantity}</span>
+                        <c:choose>
+                            <c:when test="${not empty totalQuantity}">
+                                <span class="count-product-cart">${totalQuantity}</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="count-product-cart">0</span>
+                            </c:otherwise>
+                        </c:choose>
                     </div>
                     <span>Giỏ hàng</span>
                 </li>

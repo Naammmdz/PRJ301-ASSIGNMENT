@@ -8,7 +8,9 @@ package dao;
 import dto.OrderItemDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -61,6 +63,30 @@ public class OrderItemDAO implements IDAO<OrderItemDTO, String> {
     @Override
     public List<OrderItemDTO> search(String searchTerm) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public List<OrderItemDTO> findByOrderID(int orderID) {
+        List<OrderItemDTO> orderItems = new ArrayList<>();
+        String sql = "SELECT orderItemID, quantity, price, productID FROM tblOrderItems WHERE orderID = ?";
+        
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, orderID);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {
+                orderItems.add(new OrderItemDTO(
+                        rs.getInt("orderItemID"),
+                        rs.getInt("quantity"),
+                        rs.getDouble("price"),
+                        orderID,
+                        rs.getInt("productID")
+                ));
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return orderItems;
     }
     
 }

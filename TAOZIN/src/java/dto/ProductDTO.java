@@ -5,6 +5,8 @@
  */
 package dto;
 
+import java.util.List;
+
 /**
  *
  * @author Naammm
@@ -19,6 +21,7 @@ public class ProductDTO {
     private int categoryID;
     private String createdAt;
     private String thumbnail;
+    private List<String> imageUrls;
 
     public ProductDTO() {
     }
@@ -105,6 +108,14 @@ public class ProductDTO {
 
     public void setThumbnail(String thumbnail) {
         this.thumbnail = thumbnail;
+    }
+
+    public List<String> getImageUrls() {
+        return imageUrls;
+    }
+
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
     }
     
     

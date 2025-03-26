@@ -17,6 +17,7 @@ public class OrderItemDTO {
     private double price;
     private int orderID;
     private int productID;
+    private String productName;
 
     public OrderItemDTO() {
     }
@@ -71,6 +72,14 @@ public class OrderItemDTO {
 
     public ProductDTO getProduct() {
         return new ProductDAO().readById(this.productID);
+    }
+    
+    public String getProductName() {
+        if (productName == null) {  // Tránh truy vấn nhiều lần
+            ProductDAO productDAO = new ProductDAO();
+            productName = productDAO.getProductNameById(this.productID);
+        }
+        return productName;
     }
     
 }

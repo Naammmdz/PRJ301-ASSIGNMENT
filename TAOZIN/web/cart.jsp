@@ -24,7 +24,13 @@
     <body>
         <%@include file="header.jsp" %>
         <main class="main-wrapper">
-            <div class="container">                
+            <div class="container">  
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li><a href="index.jsp">Trang chủ</a></li>
+                        <li><a href="CartController">Giỏ hàng</a></li>
+                    </ul>
+                </nav>
                 <div class="cart-container">
                     <c:forEach items="${cart}" var="orderItem">
                         <div class="cart-item" action="CartController" method="post">
@@ -52,7 +58,8 @@
                 </div>             
                 <div class="checkout">
                     <p>Tạm tính: <span class="total-price"><fmt:formatNumber value="${total}" type="number" pattern="#,###"/> VNĐ</span></p>
-                    <button class="checkout-btn">Mua ngay</button>
+                    
+                    <a href="checkout.jsp"><button class="checkout-btn">Mua ngay</button></a>
                 </div>
             </div>
         </main>

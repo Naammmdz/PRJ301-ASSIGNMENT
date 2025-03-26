@@ -52,7 +52,7 @@ public class CheckoutController extends HttpServlet {
         OrderDAO orderDAO = new OrderDAO();
         String code = randomString(10);
         
-        OrderDTO order = new OrderDTO(code, "pending", user.getUserID());
+        OrderDTO order = new OrderDTO(code, "Đang xử lý", user.getUserID());
         boolean check = orderDAO.create(order);
         
         if (check) {
@@ -71,6 +71,8 @@ public class CheckoutController extends HttpServlet {
             session.setAttribute("toastMessage", "Đặt hàng thành công!");
             session.setAttribute("toastType", "success");
             session.removeAttribute("cart");
+            session.removeAttribute("totalQuantity");
+            session.removeAttribute("total");
         }
         
         response.sendRedirect("HomeController");

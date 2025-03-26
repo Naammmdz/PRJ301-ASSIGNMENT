@@ -25,6 +25,7 @@
         <%@include file="header.jsp" %>
         <main class="main-wrapper">
             <div class="container">
+                <c:if test="${not empty productDetail}">
                 <nav aria-label="breadcrumb">
                     <ul class="breadcrumb">
                         <li><a href="index.jsp">Trang chủ</a></li>
@@ -42,10 +43,25 @@
 <!--                    <input type="hidden" name="quantity" value="${productDetail.stockQuantity}">-->
                     <input type="hidden" name="productId" value="${productDetail.productID}">
                     <input type="hidden" name="productPrice" value="${productDetail.price}">
-                    <div class="image">
+<!--                    <div class="image">
                         <img src="${productDetail.thumbnail}" alt="">
-                    </div>
+                    </div>-->
+                    <div class="image-gallery">
+                        <!-- Ảnh chính -->
+                        <div class="main-image">
+                            <img id="main-img" src="${productDetail.thumbnail}" alt="Product Image">
+                        </div>
 
+                        <!-- Danh sách ảnh nhỏ -->
+                        <div class="thumbnail-gallery">
+                            <c:forEach var="imgUrl" items="${productDetail.imageUrls}" varStatus="loop">
+                                <img class="thumbnail ${loop.first ? 'active' : ''}" 
+                                     src="${imgUrl}" 
+                                     alt="Product Image" 
+                                     onclick="changeImage(this, '${imgUrl}')">
+                            </c:forEach>
+                        </div>
+                    </div>
                     <div class="info">
                         <h2 class="name">${productDetail.productName}</h2>
                         <p class="price"><fmt:formatNumber value="${productDetail.price}" type="number" pattern="#,###"/> VNĐ</p>
@@ -109,6 +125,7 @@
                     <button id="prev" class="slider-btn prev">❮</button>
                     <button id="next" class="slider-btn next">❯</button>
                 </div>
+                </c:if>
             </div>
         </main>
          <%@include file="footer.jsp" %>
@@ -116,5 +133,12 @@
         <%@include file="scrollup.jsp" %>
         <script src="js/main.js"></script>
         <script src="js/card-slider.js"></script>
+        <script>
+            function changeImage(imgElement, imgUrl) {
+                document.getElementById("main-img").src = imgUrl;
+                document.querySelectorAll(".thumbnail").forEach(img => img.classList.remove("active"));
+                imgElement.classList.add("active");
+            }
+        </script>
     </body>
 </html>

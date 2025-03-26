@@ -28,9 +28,7 @@
                 <nav aria-label="breadcrumb">
                     <ul class="breadcrumb">
                         <li><a href="index.jsp">Trang chủ</a></li>
-                        <c:if test="${not empty requestScope.searchTerm}">
                             <li><a href="SearchController?searchTerm=${searchTerm}">Kết quả tìm kiếm cho: '${searchTerm}'</a></li>
-                        </c:if>
                     </ul>
                 </nav>
                 <%

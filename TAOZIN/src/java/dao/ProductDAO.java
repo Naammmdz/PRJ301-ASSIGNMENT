@@ -25,7 +25,25 @@ public class ProductDAO implements IDAO<ProductDTO, Integer>{
 
     @Override
     public boolean create(ProductDTO entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            String sql = "INSERT INTO tblProducts (productName, description, price, stockQuantity, productView, categoryID, created_at, thumbnail) " +
+                 "VALUES (?, ?, ?, ?, 0, ?, GETDATE(), ?)";
+
+            try {
+                Connection conn = DBUtils.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ps.setNString(1, entity.getProductName());
+                ps.setNString(2, entity.getDescription());
+                ps.setDouble(3, entity.getPrice());
+                ps.setInt(4, entity.getStockQuantity());
+                ps.setInt(5, entity.getCategoryID());
+                ps.setString(6, entity.getThumbnail());
+
+                return ps.executeUpdate() > 0;
+
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return false;
     }
 
     @Override
@@ -90,12 +108,42 @@ public class ProductDAO implements IDAO<ProductDTO, Integer>{
 
     @Override
     public boolean update(ProductDTO entity) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       String sql = "UPDATE tblProducts SET productName=?, description=?, price=?, stockQuantity=?, categoryID=?, thumbnail=? WHERE productID=?";
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, entity.getProductName());
+            ps.setString(2, entity.getDescription());
+            ps.setDouble(3, entity.getPrice());
+            ps.setInt(4, entity.getStockQuantity());
+            ps.setInt(5, entity.getCategoryID());
+            ps.setString(6, entity.getThumbnail());
+            ps.setInt(7, entity.getProductID());
+
+            int rowsUpdated = ps.executeUpdate();
+            return rowsUpdated > 0;
+        } catch (ClassNotFoundException | SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false; 
     }
 
     @Override
     public boolean delete(Integer id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "DELETE FROM [tblProducts] WHERE [productID] = ?";
+        Connection conn;
+        try {
+            conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            int n = ps.executeUpdate();
+            return n > 0;
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override
@@ -220,6 +268,40 @@ public class ProductDAO implements IDAO<ProductDTO, Integer>{
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return productList;
+    }
+    
+    public List<String> getProductImages(int productID) {
+        List<String> images = new ArrayList<>();
+        String sql = "SELECT imageURL FROM tblProductImages WHERE productID = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, productID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                images.add(rs.getString("imageURL"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return images;
+    }
+
+    public String getProductNameById(int productID) {
+        String sql = "SELECT productName FROM tblProducts WHERE productID = ?";
+        try (Connection conn = DBUtils.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, productID);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getString("productName");
+            }
+        } catch (SQLException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return "Không xác định";
     }
     
     
